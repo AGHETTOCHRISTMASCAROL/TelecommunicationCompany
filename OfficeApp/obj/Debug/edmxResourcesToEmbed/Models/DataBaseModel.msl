@@ -1,0 +1,222 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище TelecommunicationsСompanyModelContainer" CdmEntityContainer="TelecommunicationsСompanyEntities">
+    <EntitySetMapping Name="Building">
+      <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.Building">
+        <MappingFragment StoreEntitySet="Building">
+          <ScalarProperty Name="idBuilding" ColumnName="idBuilding" />
+          <ScalarProperty Name="houseNumber" ColumnName="houseNumber" />
+          <ScalarProperty Name="idCity" ColumnName="idCity" />
+          <ScalarProperty Name="idStreet" ColumnName="idStreet" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="City">
+      <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.City">
+        <MappingFragment StoreEntitySet="City">
+          <ScalarProperty Name="idCity" ColumnName="idCity" />
+          <ScalarProperty Name="title" ColumnName="title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Client">
+      <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.Client">
+        <MappingFragment StoreEntitySet="Client">
+          <ScalarProperty Name="idClient" ColumnName="idClient" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="middleName" ColumnName="middleName" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ClientPayerCodes">
+      <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.ClientPayerCodes">
+        <MappingFragment StoreEntitySet="ClientPayerCodes">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idClient" ColumnName="idClient" />
+          <ScalarProperty Name="payerCode" ColumnName="payerCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hardware">
+      <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.Hardware">
+        <MappingFragment StoreEntitySet="Hardware">
+          <ScalarProperty Name="idHardware" ColumnName="idHardware" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="idManufacturer" ColumnName="idManufacturer" />
+          <ScalarProperty Name="idTypeOfHardware" ColumnName="idTypeOfHardware" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="availableAmount" ColumnName="availableAmount" />
+          <ScalarProperty Name="usedAmount" ColumnName="usedAmount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HardwareForService">
+      <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.HardwareForService">
+        <MappingFragment StoreEntitySet="HardwareForService">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idService" ColumnName="idService" />
+          <ScalarProperty Name="idHardware" ColumnName="idHardware" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Manufacturer">
+      <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.Manufacturer">
+        <MappingFragment StoreEntitySet="Manufacturer">
+          <ScalarProperty Name="idManufacturer" ColumnName="idManufacturer" />
+          <ScalarProperty Name="title" ColumnName="title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PayerCode">
+      <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.PayerCode">
+        <MappingFragment StoreEntitySet="PayerCode">
+          <ScalarProperty Name="payerCode1" ColumnName="payerCode" />
+          <ScalarProperty Name="idBuilding" ColumnName="idBuilding" />
+          <ScalarProperty Name="apartment" ColumnName="apartment" />
+          <ScalarProperty Name="balanse" ColumnName="balanse" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PayerCodeServices">
+      <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.PayerCodeServices">
+        <MappingFragment StoreEntitySet="PayerCodeServices">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="payerCode" ColumnName="payerCode" />
+          <ScalarProperty Name="idService" ColumnName="idService" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentTransactions">
+      <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.PaymentTransactions">
+        <MappingFragment StoreEntitySet="PaymentTransactions">
+          <ScalarProperty Name="idTransaction" ColumnName="idTransaction" />
+          <ScalarProperty Name="payerCode" ColumnName="payerCode" />
+          <ScalarProperty Name="idTypeOfTransaction" ColumnName="idTypeOfTransaction" />
+          <ScalarProperty Name="amountOfMoney" ColumnName="amountOfMoney" />
+          <ScalarProperty Name="transactionTime" ColumnName="transactionTime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Post">
+      <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.Post">
+        <MappingFragment StoreEntitySet="Post">
+          <ScalarProperty Name="idPost" ColumnName="idPost" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PostLogin">
+      <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.PostLogin">
+        <MappingFragment StoreEntitySet="PostLogin">
+          <ScalarProperty Name="idPostLogin" ColumnName="idPostLogin" />
+          <ScalarProperty Name="idPost" ColumnName="idPost" />
+          <ScalarProperty Name="password" ColumnName="password" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Request">
+      <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.Request">
+        <MappingFragment StoreEntitySet="Request">
+          <ScalarProperty Name="idRequest" ColumnName="idRequest" />
+          <ScalarProperty Name="dateOfRequest" ColumnName="dateOfRequest" />
+          <ScalarProperty Name="payerCode" ColumnName="payerCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Service">
+      <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.Service">
+        <MappingFragment StoreEntitySet="Service">
+          <ScalarProperty Name="idService" ColumnName="idService" />
+          <ScalarProperty Name="idTypeOfService" ColumnName="idTypeOfService" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Staff">
+      <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.Staff">
+        <MappingFragment StoreEntitySet="Staff">
+          <ScalarProperty Name="idStaff" ColumnName="idStaff" />
+          <ScalarProperty Name="idPost" ColumnName="idPost" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="middleName" ColumnName="middleName" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="StaffOnRequest">
+      <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.StaffOnRequest">
+        <MappingFragment StoreEntitySet="StaffOnRequest">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idRequest" ColumnName="idRequest" />
+          <ScalarProperty Name="idStaff" ColumnName="idStaff" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Street">
+      <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.Street">
+        <MappingFragment StoreEntitySet="Street">
+          <ScalarProperty Name="idStreet" ColumnName="idStreet" />
+          <ScalarProperty Name="title" ColumnName="title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TempStatement">
+      <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.TempStatement">
+        <MappingFragment StoreEntitySet="TempStatement">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="firstName" ColumnName="firstName" />
+          <ScalarProperty Name="lastName" ColumnName="lastName" />
+          <ScalarProperty Name="middleName" ColumnName="middleName" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="accept" ColumnName="accept" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypeOfHardware">
+      <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.TypeOfHardware">
+        <MappingFragment StoreEntitySet="TypeOfHardware">
+          <ScalarProperty Name="idTypeOfHardware" ColumnName="idTypeOfHardware" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="description" ColumnName="description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypeOfService">
+      <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.TypeOfService">
+        <MappingFragment StoreEntitySet="TypeOfService">
+          <ScalarProperty Name="idTypeOfService" ColumnName="idTypeOfService" />
+          <ScalarProperty Name="title" ColumnName="title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TypeOfTransaction">
+      <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.TypeOfTransaction">
+        <MappingFragment StoreEntitySet="TypeOfTransaction">
+          <ScalarProperty Name="idTypeOfTransaction" ColumnName="idTypeOfTransaction" />
+          <ScalarProperty Name="title" ColumnName="title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

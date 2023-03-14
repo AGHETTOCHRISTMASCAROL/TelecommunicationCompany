@@ -1,0 +1,20 @@
+﻿OfficeApp
+
+
+winexe
+C#
+.cs
+J:\study\study practice\app\TelecommunicationsCompany\OfficeApp\obj\Debug\
+OfficeApp
+none
+false
+DEBUG;TRACE
+J:\study\study practice\app\TelecommunicationsCompany\OfficeApp\App.xaml
+9-290213545
+2-1811159815
+42-264044147
+18-1571597705
+Views\Pages\AddEditHardwarePage.xaml;Views\Pages\HardwarePage.xaml;Views\Pages\SelectBuildingPage.xaml;Views\Pages\SelectServicesPage.xaml;Views\Pages\StatementPage.xaml;Views\Windows\LoginWindow.xaml;Views\Windows\MainWindow.xaml;Views\Windows\ManagerWindow.xaml;Views\Windows\ModeratorWindow.xaml;
+
+False
+

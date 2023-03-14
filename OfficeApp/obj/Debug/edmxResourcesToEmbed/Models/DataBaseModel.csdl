@@ -1,0 +1,564 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TelecommunicationsСompanyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Building">
+    <Key>
+      <PropertyRef Name="idBuilding" />
+    </Key>
+    <Property Name="idBuilding" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="houseNumber" Type="String" MaxLength="6" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="idCity" Type="Int16" Nullable="false" />
+    <Property Name="idStreet" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="City" Relationship="Self.FK_Building_City" FromRole="Building" ToRole="City" />
+    <NavigationProperty Name="Street" Relationship="Self.FK_Building_Street" FromRole="Building" ToRole="Street" />
+    <NavigationProperty Name="PayerCode" Relationship="Self.FK_PayerCode_Building" FromRole="Building" ToRole="PayerCode" />
+  </EntityType>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="idCity" />
+    </Key>
+    <Property Name="idCity" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Building" Relationship="Self.FK_Building_City" FromRole="City" ToRole="Building" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="idClient" />
+    </Key>
+    <Property Name="idClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="login" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="lastName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="middleName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="ClientPayerCodes" Relationship="Self.FK_ClientPayerCodes_Client" FromRole="Client" ToRole="ClientPayerCodes" />
+  </EntityType>
+  <EntityType Name="ClientPayerCodes">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idClient" Type="Int32" Nullable="false" />
+    <Property Name="payerCode" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Client" Relationship="Self.FK_ClientPayerCodes_Client" FromRole="ClientPayerCodes" ToRole="Client" />
+    <NavigationProperty Name="PayerCode1" Relationship="Self.FK_ClientPayerCodes_PayerCode" FromRole="ClientPayerCodes" ToRole="PayerCode" />
+  </EntityType>
+  <EntityType Name="Hardware">
+    <Key>
+      <PropertyRef Name="idHardware" />
+    </Key>
+    <Property Name="idHardware" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="idManufacturer" Type="Int16" Nullable="false" />
+    <Property Name="idTypeOfHardware" Type="Byte" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <Property Name="availableAmount" Type="Int32" Nullable="false" />
+    <Property Name="usedAmount" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Manufacturer" Relationship="Self.FK_Hardware_Manufacturer" FromRole="Hardware" ToRole="Manufacturer" />
+    <NavigationProperty Name="TypeOfHardware" Relationship="Self.FK_Hardware_TypeOfHardware" FromRole="Hardware" ToRole="TypeOfHardware" />
+    <NavigationProperty Name="HardwareForService" Relationship="Self.FK_HardwareForService_Hardware" FromRole="Hardware" ToRole="HardwareForService" />
+  </EntityType>
+  <EntityType Name="HardwareForService">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idService" Type="Int16" Nullable="false" />
+    <Property Name="idHardware" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Hardware" Relationship="Self.FK_HardwareForService_Hardware" FromRole="HardwareForService" ToRole="Hardware" />
+    <NavigationProperty Name="Service" Relationship="Self.FK_HardwareForService_Service" FromRole="HardwareForService" ToRole="Service" />
+  </EntityType>
+  <EntityType Name="Manufacturer">
+    <Key>
+      <PropertyRef Name="idManufacturer" />
+    </Key>
+    <Property Name="idManufacturer" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Hardware" Relationship="Self.FK_Hardware_Manufacturer" FromRole="Manufacturer" ToRole="Hardware" />
+  </EntityType>
+  <EntityType Name="PayerCode">
+    <Key>
+      <PropertyRef Name="payerCode1" />
+    </Key>
+    <Property Name="payerCode1" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="idBuilding" Type="Int32" Nullable="false" />
+    <Property Name="apartment" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="balanse" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+    <NavigationProperty Name="Building" Relationship="Self.FK_PayerCode_Building" FromRole="PayerCode" ToRole="Building" />
+    <NavigationProperty Name="ClientPayerCodes" Relationship="Self.FK_ClientPayerCodes_PayerCode" FromRole="PayerCode" ToRole="ClientPayerCodes" />
+    <NavigationProperty Name="PayerCodeServices" Relationship="Self.FK_PayerCodeServices_PayerCode" FromRole="PayerCode" ToRole="PayerCodeServices" />
+    <NavigationProperty Name="PaymentTransactions" Relationship="Self.FK_PaymentTransactions_PayerCode" FromRole="PayerCode" ToRole="PaymentTransactions" />
+    <NavigationProperty Name="Request" Relationship="Self.FK_Request_PayerCode" FromRole="PayerCode" ToRole="Request" />
+  </EntityType>
+  <EntityType Name="PayerCodeServices">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="payerCode" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="idService" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="PayerCode1" Relationship="Self.FK_PayerCodeServices_PayerCode" FromRole="PayerCodeServices" ToRole="PayerCode" />
+    <NavigationProperty Name="Service" Relationship="Self.FK_PayerCodeServices_Service" FromRole="PayerCodeServices" ToRole="Service" />
+  </EntityType>
+  <EntityType Name="PaymentTransactions">
+    <Key>
+      <PropertyRef Name="idTransaction" />
+    </Key>
+    <Property Name="idTransaction" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="payerCode" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="idTypeOfTransaction" Type="Byte" Nullable="false" />
+    <Property Name="amountOfMoney" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+    <Property Name="transactionTime" Type="DateTime" Nullable="false" Precision="0" />
+    <NavigationProperty Name="PayerCode1" Relationship="Self.FK_PaymentTransactions_PayerCode" FromRole="PaymentTransactions" ToRole="PayerCode" />
+    <NavigationProperty Name="TypeOfTransaction" Relationship="Self.FK_PaymentTransactions_TypeOfTransaction" FromRole="PaymentTransactions" ToRole="TypeOfTransaction" />
+  </EntityType>
+  <EntityType Name="Post">
+    <Key>
+      <PropertyRef Name="idPost" />
+    </Key>
+    <Property Name="idPost" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="PostLogin" Relationship="Self.FK_PostLogin_Post" FromRole="Post" ToRole="PostLogin" />
+    <NavigationProperty Name="Staff" Relationship="Self.FK_Staff_Post" FromRole="Post" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="PostLogin">
+    <Key>
+      <PropertyRef Name="idPostLogin" />
+    </Key>
+    <Property Name="idPostLogin" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idPost" Type="Byte" Nullable="false" />
+    <Property Name="password" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Post" Relationship="Self.FK_PostLogin_Post" FromRole="PostLogin" ToRole="Post" />
+  </EntityType>
+  <EntityType Name="Request">
+    <Key>
+      <PropertyRef Name="idRequest" />
+    </Key>
+    <Property Name="idRequest" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="dateOfRequest" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="payerCode" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="PayerCode1" Relationship="Self.FK_Request_PayerCode" FromRole="Request" ToRole="PayerCode" />
+    <NavigationProperty Name="StaffOnRequest" Relationship="Self.FK_StaffOnRequest_Request" FromRole="Request" ToRole="StaffOnRequest" />
+  </EntityType>
+  <EntityType Name="Service">
+    <Key>
+      <PropertyRef Name="idService" />
+    </Key>
+    <Property Name="idService" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idTypeOfService" Type="Byte" Nullable="false" />
+    <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="price" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="HardwareForService" Relationship="Self.FK_HardwareForService_Service" FromRole="Service" ToRole="HardwareForService" />
+    <NavigationProperty Name="PayerCodeServices" Relationship="Self.FK_PayerCodeServices_Service" FromRole="Service" ToRole="PayerCodeServices" />
+    <NavigationProperty Name="TypeOfService" Relationship="Self.FK_Service_TypeOfService" FromRole="Service" ToRole="TypeOfService" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="idStaff" />
+    </Key>
+    <Property Name="idStaff" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idPost" Type="Byte" Nullable="false" />
+    <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="lastName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="middleName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Post" Relationship="Self.FK_Staff_Post" FromRole="Staff" ToRole="Post" />
+    <NavigationProperty Name="StaffOnRequest" Relationship="Self.FK_StaffOnRequest_Staff" FromRole="Staff" ToRole="StaffOnRequest" />
+  </EntityType>
+  <EntityType Name="StaffOnRequest">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idRequest" Type="Int32" Nullable="false" />
+    <Property Name="idStaff" Type="Int16" Nullable="false" />
+    <NavigationProperty Name="Request" Relationship="Self.FK_StaffOnRequest_Request" FromRole="StaffOnRequest" ToRole="Request" />
+    <NavigationProperty Name="Staff" Relationship="Self.FK_StaffOnRequest_Staff" FromRole="StaffOnRequest" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="Street">
+    <Key>
+      <PropertyRef Name="idStreet" />
+    </Key>
+    <Property Name="idStreet" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Building" Relationship="Self.FK_Building_Street" FromRole="Street" ToRole="Building" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TempStatement">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="lastName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="middleName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="accept" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TypeOfHardware">
+    <Key>
+      <PropertyRef Name="idTypeOfHardware" />
+    </Key>
+    <Property Name="idTypeOfHardware" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Hardware" Relationship="Self.FK_Hardware_TypeOfHardware" FromRole="TypeOfHardware" ToRole="Hardware" />
+  </EntityType>
+  <EntityType Name="TypeOfService">
+    <Key>
+      <PropertyRef Name="idTypeOfService" />
+    </Key>
+    <Property Name="idTypeOfService" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Service" Relationship="Self.FK_Service_TypeOfService" FromRole="TypeOfService" ToRole="Service" />
+  </EntityType>
+  <EntityType Name="TypeOfTransaction">
+    <Key>
+      <PropertyRef Name="idTypeOfTransaction" />
+    </Key>
+    <Property Name="idTypeOfTransaction" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="PaymentTransactions" Relationship="Self.FK_PaymentTransactions_TypeOfTransaction" FromRole="TypeOfTransaction" ToRole="PaymentTransactions" />
+  </EntityType>
+  <Association Name="FK_Building_City">
+    <End Role="City" Type="Self.City" Multiplicity="1" />
+    <End Role="Building" Type="Self.Building" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="idCity" />
+      </Principal>
+      <Dependent Role="Building">
+        <PropertyRef Name="idCity" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Building_Street">
+    <End Role="Street" Type="Self.Street" Multiplicity="1" />
+    <End Role="Building" Type="Self.Building" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Street">
+        <PropertyRef Name="idStreet" />
+      </Principal>
+      <Dependent Role="Building">
+        <PropertyRef Name="idStreet" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PayerCode_Building">
+    <End Role="Building" Type="Self.Building" Multiplicity="1" />
+    <End Role="PayerCode" Type="Self.PayerCode" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Building">
+        <PropertyRef Name="idBuilding" />
+      </Principal>
+      <Dependent Role="PayerCode">
+        <PropertyRef Name="idBuilding" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClientPayerCodes_Client">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="ClientPayerCodes" Type="Self.ClientPayerCodes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="idClient" />
+      </Principal>
+      <Dependent Role="ClientPayerCodes">
+        <PropertyRef Name="idClient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ClientPayerCodes_PayerCode">
+    <End Role="PayerCode" Type="Self.PayerCode" Multiplicity="1" />
+    <End Role="ClientPayerCodes" Type="Self.ClientPayerCodes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PayerCode">
+        <PropertyRef Name="payerCode1" />
+      </Principal>
+      <Dependent Role="ClientPayerCodes">
+        <PropertyRef Name="payerCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Hardware_Manufacturer">
+    <End Role="Manufacturer" Type="Self.Manufacturer" Multiplicity="1" />
+    <End Role="Hardware" Type="Self.Hardware" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manufacturer">
+        <PropertyRef Name="idManufacturer" />
+      </Principal>
+      <Dependent Role="Hardware">
+        <PropertyRef Name="idManufacturer" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Hardware_TypeOfHardware">
+    <End Role="TypeOfHardware" Type="Self.TypeOfHardware" Multiplicity="1" />
+    <End Role="Hardware" Type="Self.Hardware" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeOfHardware">
+        <PropertyRef Name="idTypeOfHardware" />
+      </Principal>
+      <Dependent Role="Hardware">
+        <PropertyRef Name="idTypeOfHardware" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HardwareForService_Hardware">
+    <End Role="Hardware" Type="Self.Hardware" Multiplicity="1" />
+    <End Role="HardwareForService" Type="Self.HardwareForService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Hardware">
+        <PropertyRef Name="idHardware" />
+      </Principal>
+      <Dependent Role="HardwareForService">
+        <PropertyRef Name="idHardware" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_HardwareForService_Service">
+    <End Role="Service" Type="Self.Service" Multiplicity="1" />
+    <End Role="HardwareForService" Type="Self.HardwareForService" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="idService" />
+      </Principal>
+      <Dependent Role="HardwareForService">
+        <PropertyRef Name="idService" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PayerCodeServices_PayerCode">
+    <End Role="PayerCode" Type="Self.PayerCode" Multiplicity="1" />
+    <End Role="PayerCodeServices" Type="Self.PayerCodeServices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PayerCode">
+        <PropertyRef Name="payerCode1" />
+      </Principal>
+      <Dependent Role="PayerCodeServices">
+        <PropertyRef Name="payerCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PaymentTransactions_PayerCode">
+    <End Role="PayerCode" Type="Self.PayerCode" Multiplicity="1" />
+    <End Role="PaymentTransactions" Type="Self.PaymentTransactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PayerCode">
+        <PropertyRef Name="payerCode1" />
+      </Principal>
+      <Dependent Role="PaymentTransactions">
+        <PropertyRef Name="payerCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Request_PayerCode">
+    <End Role="PayerCode" Type="Self.PayerCode" Multiplicity="1" />
+    <End Role="Request" Type="Self.Request" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PayerCode">
+        <PropertyRef Name="payerCode1" />
+      </Principal>
+      <Dependent Role="Request">
+        <PropertyRef Name="payerCode" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PayerCodeServices_Service">
+    <End Role="Service" Type="Self.Service" Multiplicity="1" />
+    <End Role="PayerCodeServices" Type="Self.PayerCodeServices" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Service">
+        <PropertyRef Name="idService" />
+      </Principal>
+      <Dependent Role="PayerCodeServices">
+        <PropertyRef Name="idService" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PaymentTransactions_TypeOfTransaction">
+    <End Role="TypeOfTransaction" Type="Self.TypeOfTransaction" Multiplicity="1" />
+    <End Role="PaymentTransactions" Type="Self.PaymentTransactions" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeOfTransaction">
+        <PropertyRef Name="idTypeOfTransaction" />
+      </Principal>
+      <Dependent Role="PaymentTransactions">
+        <PropertyRef Name="idTypeOfTransaction" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PostLogin_Post">
+    <End Role="Post" Type="Self.Post" Multiplicity="1" />
+    <End Role="PostLogin" Type="Self.PostLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="idPost" />
+      </Principal>
+      <Dependent Role="PostLogin">
+        <PropertyRef Name="idPost" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Staff_Post">
+    <End Role="Post" Type="Self.Post" Multiplicity="1" />
+    <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Post">
+        <PropertyRef Name="idPost" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="idPost" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StaffOnRequest_Request">
+    <End Role="Request" Type="Self.Request" Multiplicity="1" />
+    <End Role="StaffOnRequest" Type="Self.StaffOnRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Request">
+        <PropertyRef Name="idRequest" />
+      </Principal>
+      <Dependent Role="StaffOnRequest">
+        <PropertyRef Name="idRequest" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Service_TypeOfService">
+    <End Role="TypeOfService" Type="Self.TypeOfService" Multiplicity="1" />
+    <End Role="Service" Type="Self.Service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypeOfService">
+        <PropertyRef Name="idTypeOfService" />
+      </Principal>
+      <Dependent Role="Service">
+        <PropertyRef Name="idTypeOfService" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_StaffOnRequest_Staff">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+    <End Role="StaffOnRequest" Type="Self.StaffOnRequest" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="idStaff" />
+      </Principal>
+      <Dependent Role="StaffOnRequest">
+        <PropertyRef Name="idStaff" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TelecommunicationsСompanyEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Building" EntityType="Self.Building" />
+    <EntitySet Name="City" EntityType="Self.City" />
+    <EntitySet Name="Client" EntityType="Self.Client" />
+    <EntitySet Name="ClientPayerCodes" EntityType="Self.ClientPayerCodes" />
+    <EntitySet Name="Hardware" EntityType="Self.Hardware" />
+    <EntitySet Name="HardwareForService" EntityType="Self.HardwareForService" />
+    <EntitySet Name="Manufacturer" EntityType="Self.Manufacturer" />
+    <EntitySet Name="PayerCode" EntityType="Self.PayerCode" />
+    <EntitySet Name="PayerCodeServices" EntityType="Self.PayerCodeServices" />
+    <EntitySet Name="PaymentTransactions" EntityType="Self.PaymentTransactions" />
+    <EntitySet Name="Post" EntityType="Self.Post" />
+    <EntitySet Name="PostLogin" EntityType="Self.PostLogin" />
+    <EntitySet Name="Request" EntityType="Self.Request" />
+    <EntitySet Name="Service" EntityType="Self.Service" />
+    <EntitySet Name="Staff" EntityType="Self.Staff" />
+    <EntitySet Name="StaffOnRequest" EntityType="Self.StaffOnRequest" />
+    <EntitySet Name="Street" EntityType="Self.Street" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="TempStatement" EntityType="Self.TempStatement" />
+    <EntitySet Name="TypeOfHardware" EntityType="Self.TypeOfHardware" />
+    <EntitySet Name="TypeOfService" EntityType="Self.TypeOfService" />
+    <EntitySet Name="TypeOfTransaction" EntityType="Self.TypeOfTransaction" />
+    <AssociationSet Name="FK_Building_City" Association="Self.FK_Building_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="Building" EntitySet="Building" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Building_Street" Association="Self.FK_Building_Street">
+      <End Role="Street" EntitySet="Street" />
+      <End Role="Building" EntitySet="Building" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PayerCode_Building" Association="Self.FK_PayerCode_Building">
+      <End Role="Building" EntitySet="Building" />
+      <End Role="PayerCode" EntitySet="PayerCode" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClientPayerCodes_Client" Association="Self.FK_ClientPayerCodes_Client">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="ClientPayerCodes" EntitySet="ClientPayerCodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ClientPayerCodes_PayerCode" Association="Self.FK_ClientPayerCodes_PayerCode">
+      <End Role="PayerCode" EntitySet="PayerCode" />
+      <End Role="ClientPayerCodes" EntitySet="ClientPayerCodes" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Hardware_Manufacturer" Association="Self.FK_Hardware_Manufacturer">
+      <End Role="Manufacturer" EntitySet="Manufacturer" />
+      <End Role="Hardware" EntitySet="Hardware" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Hardware_TypeOfHardware" Association="Self.FK_Hardware_TypeOfHardware">
+      <End Role="TypeOfHardware" EntitySet="TypeOfHardware" />
+      <End Role="Hardware" EntitySet="Hardware" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HardwareForService_Hardware" Association="Self.FK_HardwareForService_Hardware">
+      <End Role="Hardware" EntitySet="Hardware" />
+      <End Role="HardwareForService" EntitySet="HardwareForService" />
+    </AssociationSet>
+    <AssociationSet Name="FK_HardwareForService_Service" Association="Self.FK_HardwareForService_Service">
+      <End Role="Service" EntitySet="Service" />
+      <End Role="HardwareForService" EntitySet="HardwareForService" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PayerCodeServices_PayerCode" Association="Self.FK_PayerCodeServices_PayerCode">
+      <End Role="PayerCode" EntitySet="PayerCode" />
+      <End Role="PayerCodeServices" EntitySet="PayerCodeServices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PaymentTransactions_PayerCode" Association="Self.FK_PaymentTransactions_PayerCode">
+      <End Role="PayerCode" EntitySet="PayerCode" />
+      <End Role="PaymentTransactions" EntitySet="PaymentTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Request_PayerCode" Association="Self.FK_Request_PayerCode">
+      <End Role="PayerCode" EntitySet="PayerCode" />
+      <End Role="Request" EntitySet="Request" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PayerCodeServices_Service" Association="Self.FK_PayerCodeServices_Service">
+      <End Role="Service" EntitySet="Service" />
+      <End Role="PayerCodeServices" EntitySet="PayerCodeServices" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PaymentTransactions_TypeOfTransaction" Association="Self.FK_PaymentTransactions_TypeOfTransaction">
+      <End Role="TypeOfTransaction" EntitySet="TypeOfTransaction" />
+      <End Role="PaymentTransactions" EntitySet="PaymentTransactions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PostLogin_Post" Association="Self.FK_PostLogin_Post">
+      <End Role="Post" EntitySet="Post" />
+      <End Role="PostLogin" EntitySet="PostLogin" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Staff_Post" Association="Self.FK_Staff_Post">
+      <End Role="Post" EntitySet="Post" />
+      <End Role="Staff" EntitySet="Staff" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StaffOnRequest_Request" Association="Self.FK_StaffOnRequest_Request">
+      <End Role="Request" EntitySet="Request" />
+      <End Role="StaffOnRequest" EntitySet="StaffOnRequest" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Service_TypeOfService" Association="Self.FK_Service_TypeOfService">
+      <End Role="TypeOfService" EntitySet="TypeOfService" />
+      <End Role="Service" EntitySet="Service" />
+    </AssociationSet>
+    <AssociationSet Name="FK_StaffOnRequest_Staff" Association="Self.FK_StaffOnRequest_Staff">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="StaffOnRequest" EntitySet="StaffOnRequest" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

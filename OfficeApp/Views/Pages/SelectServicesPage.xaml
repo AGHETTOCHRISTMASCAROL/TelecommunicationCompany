@@ -1,0 +1,57 @@
+﻿<Page x:Class="OfficeApp.Views.Pages.SelectServicesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:OfficeApp.Views.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="1060" d:DesignWidth="1440"
+      Title="SelectServicesPage" Background="#171717">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <DataGrid x:Name="dgService" Grid.Row="0" Grid.Column="0" Width="auto" Height="auto">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox x:Name="chbSelect" Height="auto" Width="auto" Checked="chbSelect_Checked" Unchecked="chbSelect_Unchecked"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="id" Binding="{Binding idService}" Width="auto"/>
+                    <DataGridTextColumn Header="Название" Binding="{Binding title}" Width="auto"/>
+                    <DataGridTextColumn Header="Тип" Binding="{Binding TypeOfService.title}" Width="auto"/>
+                    <DataGridTextColumn Header="Цена" Binding="{Binding price}" Width="auto"/>
+                    <DataGridTextColumn Header="Описание" Binding="{Binding description}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Button x:Name="btnAccept" Grid.Row="0" Grid.Column="0" Content="Принять" Click="btnAccept_Click"/>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

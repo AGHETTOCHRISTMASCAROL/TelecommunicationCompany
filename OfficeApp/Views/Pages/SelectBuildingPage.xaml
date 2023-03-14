@@ -1,0 +1,57 @@
+﻿<Page x:Class="OfficeApp.Views.Pages.SelectBuildingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:OfficeApp.Views.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="1060" d:DesignWidth="1440"
+      Title="SelectBuildingPage" Background="#171717">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <TextBox x:Name="tbSearchCity" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" TextChanged="tbSearchCity_TextChanged"/>
+            <TextBox x:Name="tbSearchStreet" Grid.Row="0" Grid.Column="0" TextChanged="tbSearchStreet_TextChanged"/>
+            <TextBox x:Name="tbSearchHouse" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" TextChanged="tbSearchHouse_TextChanged"/>
+
+            <DataGrid x:Name="dgBulding" Grid.Row="1" Grid.Column="0" Width="auto" Height="auto">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Город" Binding="{Binding City.title}" Width="*"/>
+                    <DataGridTextColumn Header="Улица" Binding="{Binding Street.title}" Width="*"/>
+                    <DataGridTextColumn Header="Дом" Binding="{Binding houseNumber}" Width="*"/>
+                    <DataGridTemplateColumn Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="btnSelect" Content="Выбрать" Height="auto" Click="btnSelect_Click"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
