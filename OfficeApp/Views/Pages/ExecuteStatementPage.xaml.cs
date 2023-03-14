@@ -41,19 +41,68 @@ namespace OfficeApp.Views.Pages
             _client.password = StringGenerator.RandomString(8);
 
             _payerCode.payerCode1 = tbPayerCode.Text;
-            _payerCode.Building = StaticContainer.StatementBuilding;
+            try
+            {
+                _payerCode.Building = StaticContainer.StatementBuilding;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString());
+                return;
+            }
             _payerCode.apartment = tbApartment.Text;
             _payerCode.balanse = 0;
 
             _clientPayerCodes.Client = _client;
             _clientPayerCodes.PayerCode1 = _payerCode;
 
-            foreach(var service in StaticContainer.StatementListOfServices)
+            StringBuilder errors = new StringBuilder();
+
+            if(string.IsNullOrWhiteSpace(_client.firstName) == true)
             {
-                var payerCodeService = new PayerCodeServices();
-                payerCodeService.PayerCode1 = _payerCode;
-                payerCodeService.Service = service;
-                listOfPayerCodeServices.Add(payerCodeService);
+                errors.AppendLine("Заполните имя");
+            }
+
+            if (string.IsNullOrWhiteSpace(_client.lastName) == true)
+            {
+                errors.AppendLine("Заполните фамилию");
+            }
+
+            if (string.IsNullOrWhiteSpace(_client.phone) == true)
+            {
+                errors.AppendLine("Заполните телефон");
+            }
+
+            if (string.IsNullOrWhiteSpace(_payerCode.apartment) == true)
+            {
+                errors.AppendLine("Заполните квартиру");
+            }
+
+            if (string.IsNullOrWhiteSpace(_payerCode.payerCode1) == true)
+            {
+                errors.AppendLine("Заполните лицевой счет");
+            }
+
+            if(errors.Length > 0)
+            {
+                MessageBox.Show(errors.ToString());
+                return;
+            }
+
+            try
+            {
+                foreach (var service in StaticContainer.StatementListOfServices)
+                {
+                    var payerCodeService = new PayerCodeServices();
+                    payerCodeService.PayerCode1 = _payerCode;
+                    payerCodeService.Service = service;
+                    listOfPayerCodeServices.Add(payerCodeService);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+                return;
             }
 
             Helper.GetContext().Client.Add(_client);
@@ -64,6 +113,10 @@ namespace OfficeApp.Views.Pages
             try
             {
                 Helper.GetContext().SaveChanges();
+                MessageBox.Show("Успешно");
+                //переход
+                StaticContainer.StatementBuilding = null;
+                StaticContainer.StatementListOfServices.Clear();
             }
             catch (Exception ex)
             {

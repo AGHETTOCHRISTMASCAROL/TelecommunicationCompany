@@ -7,7 +7,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="1060" d:DesignWidth="1440"
       Title="ExecuteStatementPage" Background="#171717">
-
+ 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0"/>

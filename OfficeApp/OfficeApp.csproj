@@ -161,8 +161,8 @@
     <Compile Include="Views\Pages\SelectServicesPage.xaml.cs">
       <DependentUpon>SelectServicesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Pages\StatementPage.xaml.cs">
-      <DependentUpon>StatementPage.xaml</DependentUpon>
+    <Compile Include="Views\Pages\ExecuteStatementPage.xaml.cs">
+      <DependentUpon>ExecuteStatementPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Windows\ManagerWindow.xaml.cs">
       <DependentUpon>ManagerWindow.xaml</DependentUpon>
@@ -186,7 +186,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Pages\StatementPage.xaml">
+    <Page Include="Views\Pages\ExecuteStatementPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
