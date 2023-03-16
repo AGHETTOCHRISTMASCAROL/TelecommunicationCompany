@@ -164,6 +164,9 @@
     <Compile Include="Views\Pages\ExecuteStatementPage.xaml.cs">
       <DependentUpon>ExecuteStatementPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\TempStatementPage.xaml.cs">
+      <DependentUpon>TempStatementPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Windows\ManagerWindow.xaml.cs">
       <DependentUpon>ManagerWindow.xaml</DependentUpon>
     </Compile>
@@ -187,6 +190,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\ExecuteStatementPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\TempStatementPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

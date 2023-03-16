@@ -1,0 +1,615 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище TelecommunicationsСompanyModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Building">
+          <Key>
+            <PropertyRef Name="idBuilding" />
+          </Key>
+          <Property Name="idBuilding" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="houseNumber" Type="char" MaxLength="6" Nullable="false" />
+          <Property Name="idCity" Type="smallint" Nullable="false" />
+          <Property Name="idStreet" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="idCity" />
+          </Key>
+          <Property Name="idCity" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="idClient" />
+          </Key>
+          <Property Name="idClient" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="login" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="300" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="middleName" Type="nvarchar" MaxLength="70" />
+          <Property Name="phone" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ClientPayerCodes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idClient" Type="int" Nullable="false" />
+          <Property Name="payerCode" Type="char" MaxLength="12" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PayerCode">
+          <Key>
+            <PropertyRef Name="payerCode" />
+          </Key>
+          <Property Name="payerCode" Type="char" MaxLength="12" Nullable="false" />
+          <Property Name="idBuilding" Type="int" Nullable="false" />
+          <Property Name="apartment" Type="char" MaxLength="4" Nullable="false" />
+          <Property Name="balanse" Type="smallmoney" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PayerCodeServices">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="payerCode" Type="char" MaxLength="12" Nullable="false" />
+          <Property Name="idService" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="idService" />
+          </Key>
+          <Property Name="idService" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idTypeOfService" Type="tinyint" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="price" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="description" Type="nvarchar" MaxLength="300" />
+        </EntityType>
+        <EntityType Name="Street">
+          <Key>
+            <PropertyRef Name="idStreet" />
+          </Key>
+          <Property Name="idStreet" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TempStatement">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="firstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastName" Type="nvarchar" MaxLength="70" Nullable="false" />
+          <Property Name="middleName" Type="nvarchar" MaxLength="70" />
+          <Property Name="phone" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="accept" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeOfService">
+          <Key>
+            <PropertyRef Name="idTypeOfService" />
+          </Key>
+          <Property Name="idTypeOfService" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="70" />
+        </EntityType>
+        <Association Name="FK_Building_City">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="Building" Type="Self.Building" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="idCity" />
+            </Principal>
+            <Dependent Role="Building">
+              <PropertyRef Name="idCity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Building_Street">
+          <End Role="Street" Type="Self.Street" Multiplicity="1" />
+          <End Role="Building" Type="Self.Building" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Street">
+              <PropertyRef Name="idStreet" />
+            </Principal>
+            <Dependent Role="Building">
+              <PropertyRef Name="idStreet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientPayerCodes_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="ClientPayerCodes" Type="Self.ClientPayerCodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="idClient" />
+            </Principal>
+            <Dependent Role="ClientPayerCodes">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientPayerCodes_PayerCode">
+          <End Role="PayerCode" Type="Self.PayerCode" Multiplicity="1" />
+          <End Role="ClientPayerCodes" Type="Self.ClientPayerCodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PayerCode">
+              <PropertyRef Name="payerCode" />
+            </Principal>
+            <Dependent Role="ClientPayerCodes">
+              <PropertyRef Name="payerCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PayerCode_Building">
+          <End Role="Building" Type="Self.Building" Multiplicity="1" />
+          <End Role="PayerCode" Type="Self.PayerCode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Building">
+              <PropertyRef Name="idBuilding" />
+            </Principal>
+            <Dependent Role="PayerCode">
+              <PropertyRef Name="idBuilding" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PayerCodeServices_PayerCode">
+          <End Role="PayerCode" Type="Self.PayerCode" Multiplicity="1" />
+          <End Role="PayerCodeServices" Type="Self.PayerCodeServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PayerCode">
+              <PropertyRef Name="payerCode" />
+            </Principal>
+            <Dependent Role="PayerCodeServices">
+              <PropertyRef Name="payerCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PayerCodeServices_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="PayerCodeServices" Type="Self.PayerCodeServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="idService" />
+            </Principal>
+            <Dependent Role="PayerCodeServices">
+              <PropertyRef Name="idService" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_TypeOfService">
+          <End Role="TypeOfService" Type="Self.TypeOfService" Multiplicity="1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfService">
+              <PropertyRef Name="idTypeOfService" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="idTypeOfService" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище TelecommunicationsСompanyModelContainer">
+          <EntitySet Name="Building" EntityType="Self.Building" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientPayerCodes" EntityType="Self.ClientPayerCodes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PayerCode" EntityType="Self.PayerCode" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PayerCodeServices" EntityType="Self.PayerCodeServices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Street" EntityType="Self.Street" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TempStatement" EntityType="Self.TempStatement" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeOfService" EntityType="Self.TypeOfService" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Building_City" Association="Self.FK_Building_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Building" EntitySet="Building" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Building_Street" Association="Self.FK_Building_Street">
+            <End Role="Street" EntitySet="Street" />
+            <End Role="Building" EntitySet="Building" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientPayerCodes_Client" Association="Self.FK_ClientPayerCodes_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="ClientPayerCodes" EntitySet="ClientPayerCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientPayerCodes_PayerCode" Association="Self.FK_ClientPayerCodes_PayerCode">
+            <End Role="PayerCode" EntitySet="PayerCode" />
+            <End Role="ClientPayerCodes" EntitySet="ClientPayerCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PayerCode_Building" Association="Self.FK_PayerCode_Building">
+            <End Role="Building" EntitySet="Building" />
+            <End Role="PayerCode" EntitySet="PayerCode" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PayerCodeServices_PayerCode" Association="Self.FK_PayerCodeServices_PayerCode">
+            <End Role="PayerCode" EntitySet="PayerCode" />
+            <End Role="PayerCodeServices" EntitySet="PayerCodeServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PayerCodeServices_Service" Association="Self.FK_PayerCodeServices_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="PayerCodeServices" EntitySet="PayerCodeServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_TypeOfService" Association="Self.FK_Service_TypeOfService">
+            <End Role="TypeOfService" EntitySet="TypeOfService" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TelecommunicationsСompanyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Building">
+          <Key>
+            <PropertyRef Name="idBuilding" />
+          </Key>
+          <Property Name="idBuilding" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="houseNumber" Type="String" MaxLength="6" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="idCity" Type="Int16" Nullable="false" />
+          <Property Name="idStreet" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="City" Relationship="Self.FK_Building_City" FromRole="Building" ToRole="City" />
+          <NavigationProperty Name="Street" Relationship="Self.FK_Building_Street" FromRole="Building" ToRole="Street" />
+          <NavigationProperty Name="PayerCode" Relationship="Self.FK_PayerCode_Building" FromRole="Building" ToRole="PayerCode" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="idCity" />
+          </Key>
+          <Property Name="idCity" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Building" Relationship="Self.FK_Building_City" FromRole="City" ToRole="Building" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="idClient" />
+          </Key>
+          <Property Name="idClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="login" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="middleName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ClientPayerCodes" Relationship="Self.FK_ClientPayerCodes_Client" FromRole="Client" ToRole="ClientPayerCodes" />
+        </EntityType>
+        <EntityType Name="ClientPayerCodes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idClient" Type="Int32" Nullable="false" />
+          <Property Name="payerCode" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_ClientPayerCodes_Client" FromRole="ClientPayerCodes" ToRole="Client" />
+          <NavigationProperty Name="PayerCode1" Relationship="Self.FK_ClientPayerCodes_PayerCode" FromRole="ClientPayerCodes" ToRole="PayerCode" />
+        </EntityType>
+        <EntityType Name="PayerCode">
+          <Key>
+            <PropertyRef Name="payerCode1" />
+          </Key>
+          <Property Name="payerCode1" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="idBuilding" Type="Int32" Nullable="false" />
+          <Property Name="apartment" Type="String" MaxLength="4" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="balanse" Type="Decimal" Precision="10" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Building" Relationship="Self.FK_PayerCode_Building" FromRole="PayerCode" ToRole="Building" />
+          <NavigationProperty Name="ClientPayerCodes" Relationship="Self.FK_ClientPayerCodes_PayerCode" FromRole="PayerCode" ToRole="ClientPayerCodes" />
+          <NavigationProperty Name="PayerCodeServices" Relationship="Self.FK_PayerCodeServices_PayerCode" FromRole="PayerCode" ToRole="PayerCodeServices" />
+        </EntityType>
+        <EntityType Name="PayerCodeServices">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="payerCode" Type="String" MaxLength="12" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="idService" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="PayerCode1" Relationship="Self.FK_PayerCodeServices_PayerCode" FromRole="PayerCodeServices" ToRole="PayerCode" />
+          <NavigationProperty Name="Service" Relationship="Self.FK_PayerCodeServices_Service" FromRole="PayerCodeServices" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="idService" />
+          </Key>
+          <Property Name="idService" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idTypeOfService" Type="Byte" Nullable="false" />
+          <Property Name="title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="price" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="PayerCodeServices" Relationship="Self.FK_PayerCodeServices_Service" FromRole="Service" ToRole="PayerCodeServices" />
+          <NavigationProperty Name="TypeOfService" Relationship="Self.FK_Service_TypeOfService" FromRole="Service" ToRole="TypeOfService" />
+        </EntityType>
+        <EntityType Name="Street">
+          <Key>
+            <PropertyRef Name="idStreet" />
+          </Key>
+          <Property Name="idStreet" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Building" Relationship="Self.FK_Building_Street" FromRole="Street" ToRole="Building" />
+        </EntityType>
+        <EntityType Name="TempStatement">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="middleName" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="10" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="accept" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TypeOfService">
+          <Key>
+            <PropertyRef Name="idTypeOfService" />
+          </Key>
+          <Property Name="idTypeOfService" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Service" Relationship="Self.FK_Service_TypeOfService" FromRole="TypeOfService" ToRole="Service" />
+        </EntityType>
+        <Association Name="FK_Building_City">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="Building" Type="Self.Building" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="idCity" />
+            </Principal>
+            <Dependent Role="Building">
+              <PropertyRef Name="idCity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Building_Street">
+          <End Role="Street" Type="Self.Street" Multiplicity="1" />
+          <End Role="Building" Type="Self.Building" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Street">
+              <PropertyRef Name="idStreet" />
+            </Principal>
+            <Dependent Role="Building">
+              <PropertyRef Name="idStreet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PayerCode_Building">
+          <End Role="Building" Type="Self.Building" Multiplicity="1" />
+          <End Role="PayerCode" Type="Self.PayerCode" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Building">
+              <PropertyRef Name="idBuilding" />
+            </Principal>
+            <Dependent Role="PayerCode">
+              <PropertyRef Name="idBuilding" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientPayerCodes_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="ClientPayerCodes" Type="Self.ClientPayerCodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="idClient" />
+            </Principal>
+            <Dependent Role="ClientPayerCodes">
+              <PropertyRef Name="idClient" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientPayerCodes_PayerCode">
+          <End Role="PayerCode" Type="Self.PayerCode" Multiplicity="1" />
+          <End Role="ClientPayerCodes" Type="Self.ClientPayerCodes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PayerCode">
+              <PropertyRef Name="payerCode1" />
+            </Principal>
+            <Dependent Role="ClientPayerCodes">
+              <PropertyRef Name="payerCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PayerCodeServices_PayerCode">
+          <End Role="PayerCode" Type="Self.PayerCode" Multiplicity="1" />
+          <End Role="PayerCodeServices" Type="Self.PayerCodeServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PayerCode">
+              <PropertyRef Name="payerCode1" />
+            </Principal>
+            <Dependent Role="PayerCodeServices">
+              <PropertyRef Name="payerCode" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PayerCodeServices_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="PayerCodeServices" Type="Self.PayerCodeServices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="idService" />
+            </Principal>
+            <Dependent Role="PayerCodeServices">
+              <PropertyRef Name="idService" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_TypeOfService">
+          <End Role="TypeOfService" Type="Self.TypeOfService" Multiplicity="1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeOfService">
+              <PropertyRef Name="idTypeOfService" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="idTypeOfService" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TelecommunicationsСompanyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Building" EntityType="Self.Building" />
+          <EntitySet Name="City" EntityType="Self.City" />
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="ClientPayerCodes" EntityType="Self.ClientPayerCodes" />
+          <EntitySet Name="PayerCode" EntityType="Self.PayerCode" />
+          <EntitySet Name="PayerCodeServices" EntityType="Self.PayerCodeServices" />
+          <EntitySet Name="Service" EntityType="Self.Service" />
+          <EntitySet Name="Street" EntityType="Self.Street" />
+          <EntitySet Name="TempStatement" EntityType="Self.TempStatement" />
+          <EntitySet Name="TypeOfService" EntityType="Self.TypeOfService" />
+          <AssociationSet Name="FK_Building_City" Association="Self.FK_Building_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Building" EntitySet="Building" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Building_Street" Association="Self.FK_Building_Street">
+            <End Role="Street" EntitySet="Street" />
+            <End Role="Building" EntitySet="Building" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PayerCode_Building" Association="Self.FK_PayerCode_Building">
+            <End Role="Building" EntitySet="Building" />
+            <End Role="PayerCode" EntitySet="PayerCode" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientPayerCodes_Client" Association="Self.FK_ClientPayerCodes_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="ClientPayerCodes" EntitySet="ClientPayerCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientPayerCodes_PayerCode" Association="Self.FK_ClientPayerCodes_PayerCode">
+            <End Role="PayerCode" EntitySet="PayerCode" />
+            <End Role="ClientPayerCodes" EntitySet="ClientPayerCodes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PayerCodeServices_PayerCode" Association="Self.FK_PayerCodeServices_PayerCode">
+            <End Role="PayerCode" EntitySet="PayerCode" />
+            <End Role="PayerCodeServices" EntitySet="PayerCodeServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PayerCodeServices_Service" Association="Self.FK_PayerCodeServices_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="PayerCodeServices" EntitySet="PayerCodeServices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_TypeOfService" Association="Self.FK_Service_TypeOfService">
+            <End Role="TypeOfService" EntitySet="TypeOfService" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище TelecommunicationsСompanyModelContainer" CdmEntityContainer="TelecommunicationsСompanyEntities">
+          <EntitySetMapping Name="Building">
+            <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.Building">
+              <MappingFragment StoreEntitySet="Building">
+                <ScalarProperty Name="idBuilding" ColumnName="idBuilding" />
+                <ScalarProperty Name="houseNumber" ColumnName="houseNumber" />
+                <ScalarProperty Name="idCity" ColumnName="idCity" />
+                <ScalarProperty Name="idStreet" ColumnName="idStreet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="City">
+            <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="idCity" ColumnName="idCity" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="idClient" ColumnName="idClient" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="middleName" ColumnName="middleName" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientPayerCodes">
+            <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.ClientPayerCodes">
+              <MappingFragment StoreEntitySet="ClientPayerCodes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idClient" ColumnName="idClient" />
+                <ScalarProperty Name="payerCode" ColumnName="payerCode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PayerCode">
+            <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.PayerCode">
+              <MappingFragment StoreEntitySet="PayerCode">
+                <ScalarProperty Name="payerCode1" ColumnName="payerCode" />
+                <ScalarProperty Name="idBuilding" ColumnName="idBuilding" />
+                <ScalarProperty Name="apartment" ColumnName="apartment" />
+                <ScalarProperty Name="balanse" ColumnName="balanse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PayerCodeServices">
+            <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.PayerCodeServices">
+              <MappingFragment StoreEntitySet="PayerCodeServices">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="payerCode" ColumnName="payerCode" />
+                <ScalarProperty Name="idService" ColumnName="idService" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Service">
+            <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="idService" ColumnName="idService" />
+                <ScalarProperty Name="idTypeOfService" ColumnName="idTypeOfService" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="description" ColumnName="description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Street">
+            <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.Street">
+              <MappingFragment StoreEntitySet="Street">
+                <ScalarProperty Name="idStreet" ColumnName="idStreet" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TempStatement">
+            <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.TempStatement">
+              <MappingFragment StoreEntitySet="TempStatement">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="middleName" ColumnName="middleName" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="accept" ColumnName="accept" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeOfService">
+            <EntityTypeMapping TypeName="TelecommunicationsСompanyModel.TypeOfService">
+              <MappingFragment StoreEntitySet="TypeOfService">
+                <ScalarProperty Name="idTypeOfService" ColumnName="idTypeOfService" />
+                <ScalarProperty Name="title" ColumnName="title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

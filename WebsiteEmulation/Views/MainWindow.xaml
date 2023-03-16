@@ -1,0 +1,22 @@
+﻿<Window x:Class="WebsiteEmulation.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WebsiteEmulation"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="1080" Width="1920" WindowStartupLocation="CenterScreen" WindowState="Maximized" Background="#171717">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button x:Name="btnGoToStatement" Grid.Row="0" Content="Заявка" Width="100" Click="btnGoToStatement_Click" Height="auto" FontSize="20"/>
+            <Button x:Name="btnGoToLogin" Grid.Row="0" Content="Войти" Width="100" Click="btnGoToLogin_Click" Height="auto" FontSize="20"/>
+        </StackPanel>
+
+        <Frame Name="websiteFrame" Grid.Row="1" Grid.Column="0" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Window>

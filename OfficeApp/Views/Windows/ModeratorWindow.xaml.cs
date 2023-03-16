@@ -1,4 +1,5 @@
 ﻿using OfficeApp.Core;
+using OfficeApp.Models;
 using OfficeApp.Views.Pages;
 using System;
 using System.Collections.Generic;
@@ -30,6 +31,11 @@ namespace OfficeApp.Views.Windows
         private void btnGoToHardware_Click(object sender, RoutedEventArgs e)
         {
             NavigationManager.Navigation(new HardwarePage());
+        }
+
+        private void btnGoToStatement_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationManager.Navigation(new TempStatementPage());
         }
     }
 }

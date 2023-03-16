@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 J:\study\study practice\app\TelecommunicationsCompany\OfficeApp\App.xaml
-91512454978
+10-681749214
 2-1811159815
-421459001298
+43-1633904998
 18-1571597705
-Views\Pages\AddEditHardwarePage.xaml;Views\Pages\HardwarePage.xaml;Views\Pages\SelectBuildingPage.xaml;Views\Pages\SelectServicesPage.xaml;Views\Pages\ExecuteStatementPage.xaml;Views\Windows\LoginWindow.xaml;Views\Windows\MainWindow.xaml;Views\Windows\ManagerWindow.xaml;Views\Windows\ModeratorWindow.xaml;
+Views\Pages\AddEditHardwarePage.xaml;Views\Pages\HardwarePage.xaml;Views\Pages\SelectBuildingPage.xaml;Views\Pages\SelectServicesPage.xaml;Views\Pages\ExecuteStatementPage.xaml;Views\Pages\TempStatementPage.xaml;Views\Windows\LoginWindow.xaml;Views\Windows\MainWindow.xaml;Views\Windows\ManagerWindow.xaml;Views\Windows\ModeratorWindow.xaml;
 
 False
 

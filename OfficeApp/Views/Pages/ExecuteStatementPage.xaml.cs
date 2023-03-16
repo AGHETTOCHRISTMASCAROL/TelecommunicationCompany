@@ -22,10 +22,20 @@ namespace OfficeApp.Views.Pages
     /// </summary>
     public partial class ExecuteStatementPage : Page
     {
+        private TempStatement _tempStatement = new TempStatement();
         private Client _client = new Client();
         private PayerCode _payerCode = new PayerCode();
         private ClientPayerCodes _clientPayerCodes = new ClientPayerCodes();
         private List<PayerCodeServices> listOfPayerCodeServices = new List<PayerCodeServices>();
+        public ExecuteStatementPage(TempStatement tempStatement)
+        {
+            InitializeComponent();
+            if(tempStatement != null)
+            {
+                _tempStatement = tempStatement;
+            }
+            DataContext = _tempStatement;
+        }
         public ExecuteStatementPage()
         {
             InitializeComponent();
@@ -109,12 +119,13 @@ namespace OfficeApp.Views.Pages
             Helper.GetContext().PayerCode.Add(_payerCode);
             Helper.GetContext().ClientPayerCodes.Add(_clientPayerCodes);
             Helper.GetContext().PayerCodeServices.AddRange(listOfPayerCodeServices);
+            Helper.GetContext().TempStatement.Remove(_tempStatement);
 
             try
             {
                 Helper.GetContext().SaveChanges();
                 MessageBox.Show("Успешно");
-                //переход
+                NavigationManager.Navigation(new TempStatementPage());
                 StaticContainer.StatementBuilding = null;
                 StaticContainer.StatementListOfServices.Clear();
             }

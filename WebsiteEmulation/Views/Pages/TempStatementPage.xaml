@@ -1,0 +1,53 @@
+﻿<Page x:Class="WebsiteEmulation.Views.Pages.TempStatementPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WebsiteEmulation.Views.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TempStatementPage" Background="#171717">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="0"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+
+            <TextBlock Text="Подача заявки" Grid.Row="0" FontSize="30"  Grid.Column="1" Foreground="White" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+            <TextBlock Text="Имя" Grid.Row="1" Grid.Column="0" Foreground="White" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Text="Фамилия" Grid.Row="2" Grid.Column="0" Foreground="White" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Text="Отчество" Grid.Row="3" Grid.Column="0" Foreground="White" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Text="Телефон" Grid.Row="4" Grid.Column="0" Foreground="White" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <TextBlock Text="" Grid.Row="5" Grid.Column="0" Foreground="White" TextAlignment="Center" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            
+            <TextBox Text="{Binding firstName}" MaxLength="50" x:Name="tbFName" Grid.Row="1" Grid.Column="1"/>
+            <TextBox Text="{Binding lastName}" MaxLength="70" x:Name="tbLName" Grid.Row="2" Grid.Column="1"/>
+            <TextBox Text="{Binding middleName}" MaxLength="70" x:Name="tbMName" Grid.Row="3" Grid.Column="1"/>
+            <TextBox Text="{Binding phone}" MaxLength="10" x:Name="tbPhone" Grid.Row="4" Grid.Column="1"/>
+            <Button x:Name="btnSendTempStatement" Grid.Row="6" Grid.Column="1" Content="Подать" Click="btnSendTempStatement_Click"/>
+        </Grid>
+    </Grid>
+</Page>

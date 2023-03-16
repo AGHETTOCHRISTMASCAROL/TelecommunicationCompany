@@ -39,7 +39,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Text="Имя"  Grid.Row="1" Grid.Column="0" Foreground="White" FontSize="30"/>
+            <TextBlock Text="Имя" Grid.Row="1" Grid.Column="0" Foreground="White" FontSize="30"/>
             <TextBlock Text="Фамилия"  Grid.Row="2" Grid.Column="0" Foreground="White" FontSize="30"/>
             <TextBlock Text="Отчество"  Grid.Row="3" Grid.Column="0" Foreground="White" FontSize="30"/>
             <TextBlock Text="Телефон"  Grid.Row="4" Grid.Column="0" Foreground="White" FontSize="30"/>
@@ -48,10 +48,10 @@
             <TextBlock Text="Лицевой счет"  Grid.Row="7" Grid.Column="0" Foreground="White" FontSize="30"/>
  
             <TextBlock Text="Заявка" Grid.Column="1" FontSize="40" Foreground="white"/>
-            <TextBox MaxLength="50" x:Name="tbFName" Grid.Column="1" Grid.Row="1"/>
-            <TextBox MaxLength="70" x:Name="tbLName" Grid.Column="1" Grid.Row="2"/>
-            <TextBox MaxLength="70"  x:Name="tbMName" Grid.Column="1" Grid.Row="3"/>
-            <TextBox MaxLength="10" x:Name="tbPhone" Grid.Column="1" Grid.Row="4"/>
+            <TextBox Text="{Binding firstName}"  MaxLength="50" x:Name="tbFName" Grid.Column="1" Grid.Row="1"/>
+            <TextBox Text="{Binding lastName}" MaxLength="70" x:Name="tbLName" Grid.Column="1" Grid.Row="2"/>
+            <TextBox Text="{Binding middleName}" MaxLength="70"  x:Name="tbMName" Grid.Column="1" Grid.Row="3"/>
+            <TextBox Text="{Binding phone}" MaxLength="10" x:Name="tbPhone" Grid.Column="1" Grid.Row="4"/>
             <Button x:Name="btnSelectBuilding" Grid.Column="1" Grid.Row="5" Width="300" Content="Выбрать адрес" Click="btnSelectBuilding_Click"/>
             <TextBox MaxLength="4" x:Name="tbApartment" Grid.Column="1" Grid.Row="6"/>
             <TextBox MaxLength="12" x:Name="tbPayerCode" Grid.Column="1" Grid.Row="7"/>

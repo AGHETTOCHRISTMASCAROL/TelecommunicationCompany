@@ -57,7 +57,7 @@
             <Setter Property="Background" Value="#171717"/>
             <Setter Property="BorderThickness" Value="0"/>
             <Setter Property="HorizontalGridLinesBrush" Value="White"/>
-            <Setter Property="VerticalGridLinesBrush" Value="White"/> 
+            <Setter Property="VerticalGridLinesBrush" Value="White"/>
         </Style>
 
         <Style TargetType="DataGridCell">

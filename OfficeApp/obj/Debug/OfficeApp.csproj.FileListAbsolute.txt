@@ -38,3 +38,5 @@ J:\study\study practice\app\TelecommunicationsCompany\OfficeApp\obj\Debug\Views\
 J:\study\study practice\app\TelecommunicationsCompany\OfficeApp\obj\Debug\Views\Pages\SelectServicesPage.baml
 J:\study\study practice\app\TelecommunicationsCompany\OfficeApp\obj\Debug\Views\Pages\ExecuteStatementPage.g.cs
 J:\study\study practice\app\TelecommunicationsCompany\OfficeApp\obj\Debug\Views\Pages\ExecuteStatementPage.baml
+J:\study\study practice\app\TelecommunicationsCompany\OfficeApp\obj\Debug\Views\Pages\TempStatementPage.g.cs
+J:\study\study practice\app\TelecommunicationsCompany\OfficeApp\obj\Debug\Views\Pages\TempStatementPage.baml
